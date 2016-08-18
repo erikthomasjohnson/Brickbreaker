@@ -4,3 +4,8 @@ c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\b
 c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.pdb
 c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.exe
 c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.pdb
+C:\Users\erikj\Documents\Visual Studio 2015\Projects\Brickbreaker02\Brickbreaker\bin\Debug\Brickbreaker.exe.config
+C:\Users\erikj\Documents\Visual Studio 2015\Projects\Brickbreaker02\Brickbreaker\obj\Debug\Brickbreaker.exe
+C:\Users\erikj\Documents\Visual Studio 2015\Projects\Brickbreaker02\Brickbreaker\obj\Debug\Brickbreaker.pdb
+C:\Users\erikj\Documents\Visual Studio 2015\Projects\Brickbreaker02\Brickbreaker\bin\Debug\Brickbreaker.exe
+C:\Users\erikj\Documents\Visual Studio 2015\Projects\Brickbreaker02\Brickbreaker\bin\Debug\Brickbreaker.pdb

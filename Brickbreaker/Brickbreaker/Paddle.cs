@@ -11,54 +11,65 @@ namespace Brickbreaker
         int paddleMove;
         public Paddle()
         {
-            paddleMove = 20;
+            Console.SetCursorPosition(50, 15);
+            paddleMove = 15;
         }
         public void PaddleDisplay()
         {
             paddleMove = PaddleMove();
             PaddleShape();
         }
-        public int PaddleShape()
+        public void PaddleShape()
         {
             string[] paddleTop = new string[30] { " ", " ", " ", " ", " ", " ", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", " ", " ", " ", " ", " ", " ", };
             string[] paddleSide = new string[30] { " ", " ", " ", " ", " ", "|", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "|", " ", " ", " ", " ", " " };
+            string[] paddleBottom = new string[30] { " ", " ", " ", " ", " ", " ", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", " ", " ", " ", " ", " ", " ", };
             Console.SetCursorPosition(paddleMove, 26);
             foreach (string shape01 in paddleTop) { Console.Write(shape01); }
             Console.SetCursorPosition(paddleMove, 27);
             foreach (string shape02 in paddleSide) { Console.Write(shape02); }
             Console.SetCursorPosition(paddleMove, 28);
             foreach (string shape03 in paddleTop) { Console.Write(shape03); }
-            return paddleMove;
         }
         public int PaddleMove()
         {
+            while(!Console.KeyAvailable)
+            {
+                return paddleMove;
+            }
             int cursorPosition = paddleMove;
             ConsoleKey keyPress = Console.ReadKey().Key;
             if (keyPress == ConsoleKey.LeftArrow)
             {
-                int moveLeft = cursorPosition - 5;
+                int moveLeft = cursorPosition - 3;
                 if (moveLeft <= 0)
                 {
                     return 0;
                 }
                 else
                 {
-                    return moveLeft;
+                    paddleMove = moveLeft;
+                    return paddleMove;
                 }
             }
             if (keyPress == ConsoleKey.RightArrow)
             {
-                int moveRight = cursorPosition + 5;
+                int moveRight = cursorPosition + 3;
                 if (moveRight >= 90)
                 {
                     return 90;
                 }
                 else
                 {
-                    return moveRight;
+                    paddleMove = moveRight;
+                    return paddleMove;
                 }
             }
-            return 50;
+            return paddleMove;
+        }
+        public int SendPaddleMove()
+        {
+            return paddleMove;
         }
     }
 }
