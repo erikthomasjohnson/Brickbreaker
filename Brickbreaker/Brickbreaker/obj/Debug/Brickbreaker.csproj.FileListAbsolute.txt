@@ -1,0 +1,6 @@
+c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.exe.config
+c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.csprojResolveAssemblyReference.cache
+c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.exe
+c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.pdb
+c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.exe
+c:\users\erikj\documents\visual studio 2015\Projects\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.pdb
