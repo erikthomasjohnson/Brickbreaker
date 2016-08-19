@@ -10,32 +10,30 @@ namespace Brickbreaker
     class Game
     {
         Wall newWall = new Wall();
-        Brick newBrick = new Brick();
         Ball newBall = new Ball();
-        Paddle newPaddle = new Paddle();
         int ballMoveLeft;
         int ballMoveTop;
-        int sendPaddleMove;
-        int levelOne = 150;
-        int levelTwo = 125;
-        int levelThree = 100;
-        int levelFour = 50;
+        int levelOne = 120;
+        int levelTwo = 80;
+        int levelThree = 50;
+        int levelFour = 30;
         int levelWin = 25;
         int gameLevel;
-        int zeroPlus;
+        int levelNumber;
         List<int> scores = new List<int>();
         public Game()
         {
-            zeroPlus = 1;
+            levelNumber = 1;
         }
         public void RunGame(int newGameLevel)
         {
             Console.CursorVisible = false;
             GameSplash(newGameLevel);
+            newBall.newBrick.BrickPositionJoin();
+            newBall.newBrick.BrickDisplay();
             newWall.WallDisplay();
-            newBrick.BrickDisplay();
-            newBall.touchPaddle.PaddleShape();
-            Console.SetCursorPosition(50, 15);
+            newBall.touchPaddle.SendPaddleReset();
+            newBall.SendBallReset();
             RunGameLoop(newGameLevel);
         }
         public void RunGameLoop(int newGameLevel)
@@ -43,7 +41,6 @@ namespace Brickbreaker
             while (!Console.KeyAvailable)
             {
                 BallBounce();
-                newWall.WallDisplay();
                 Score();
                 if (newBall.BrickProgress() == 12)
                 {
@@ -57,51 +54,50 @@ namespace Brickbreaker
         }
         public void BallBounce()
         {
-            newBall.BallDisplay();
-            ballMoveLeft = newBall.BallMove()[0];
-            ballMoveTop = newBall.BallMove()[1];
+            List<int> ballMoveLeftTop = new List<int>(newBall.BallMove());
+            ballMoveLeft = ballMoveLeftTop[0];
+            ballMoveTop = ballMoveLeftTop[1];
         }
         public void PaddleSlide()
         {
             newBall.touchPaddle.PaddleDisplay();
-            sendPaddleMove = Console.CursorLeft;
             Console.SetCursorPosition(ballMoveLeft, ballMoveTop);
         }
         public int GameLevel()
         {
             gameLevel = newBall.BrickProgress();
-            while (zeroPlus == 1)
+            while (levelNumber == 1)
             {
                 if (gameLevel == 12)
                 {
-                    zeroPlus++;
+                    levelNumber++;
                     newBall.BallReset();
                     return levelTwo;
                 }     
             }
-            while (zeroPlus == 2)
+            while (levelNumber == 2)
             {
                 if (gameLevel == 12)
                 {
-                    zeroPlus++;
+                    levelNumber++;
                     newBall.BallReset();
                     return levelThree;
                 }
             }
-            while (zeroPlus == 3)
+            while (levelNumber == 3)
             {
                 if (gameLevel == 12)
                 {
-                    zeroPlus++;
+                    levelNumber++;
                     newBall.BallReset();
                     return levelFour;
                 }
             }
-            while (zeroPlus == 4)
+            while (levelNumber == 4)
             {
                 if (gameLevel == 12)
                 {
-                    zeroPlus++;
+                    levelNumber++;
                     newBall.BallReset();
                     return levelWin;
                 }
@@ -168,15 +164,15 @@ namespace Brickbreaker
                         Console.WriteLine("YOU WIN");
                         Thread.Sleep(100);
                     }
-
                 }
-                Thread.Sleep(20000);
+                Thread.Sleep(2000);
+                RunGame(110);
             }
             Thread.Sleep(2000);
         }
         public void Score()
         {
-            int score = zeroPlus * (newBall.BrickProgress() + zeroPlus) * (10 * zeroPlus);
+            int score = levelNumber * (newBall.BrickProgress() + levelNumber) * (10 * levelNumber);
             scores.Add(score);
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("SCORE");

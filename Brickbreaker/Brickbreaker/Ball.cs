@@ -17,36 +17,62 @@ namespace Brickbreaker
         int moveTop;
         int left;
         int top;
-        int brickLeftLeftBottom;
-        int brickLeftMidBottom;
-        int brickRightMidBottom;
-        int brickRightRightBottom;
-        int brickLeftLeftCenter;
-        int brickLeftMidCenter;
-        int brickRightMidCenter;
-        int brickRightRightCenter;
-        int brickLeftLeftTop;
-        int brickLeftMidTop;
-        int brickRightMidTop;
-        int brickRightRightTop;
+        int reset;
+        int brickPositionLeft;
+        int brickPositionTop;
+        int brickWidth;
+        int brickHeight;
+        int ballWidthLeft = -1;
+        int ballWidthRight = -3;
+        int ballHeightTop = -1;
+        int ballHeightBottom = -2;
+        int brickProgress;
         public Ball()
         {
-            brickLeftLeftBottom = 0;
-            brickLeftMidBottom = 0;
-            brickRightMidBottom = 0;
-            brickRightRightBottom = 0;
-            brickLeftLeftCenter = 0;
-            brickLeftMidCenter = 0;
-            brickRightMidCenter = 0;
-            brickRightRightCenter = 0;
-            brickLeftLeftTop = 0;
-            brickLeftMidTop = 0;
-            brickRightMidTop = 0;
-            brickRightRightTop = 0;
+            reset = 0;
+            brickProgress = 0;
         }
-        public void BallDisplay()
+        public void LoseLoop()
         {
-            //BallMove();
+            for (int i = 0; i < 200; i++)
+            {
+                if ((i + 1) % 37 == 0)
+                {
+                    Console.SetCursorPosition(5, i + 60);
+                    Console.WriteLine("YOU                                                                                                     LOSE");
+                    Thread.Sleep(100);
+                }
+                if ((i + 1) % 23 == 0)
+                {
+                    Console.SetCursorPosition(15, i + 60);
+                    Console.WriteLine("YOU                                                                                 LOSE");
+                    Thread.Sleep(100);
+                }
+                if ((i + 1) % 13 == 0)
+                {
+                    Console.SetCursorPosition(25, i + 60);
+                    Console.WriteLine("YOU                                                             LOSE");
+                    Thread.Sleep(100);
+                }
+                if ((i + 1) % 7 == 0)
+                {
+                    Console.SetCursorPosition(35, i + 60);
+                    Console.WriteLine("YOU                                         LOSE");
+                    Thread.Sleep(100);
+                }
+                if ((i + 1) % 3 == 0)
+                {
+                    Console.SetCursorPosition(45, i + 60);
+                    Console.WriteLine("YOU                     LOSE");
+                    Thread.Sleep(100);
+                }
+                else
+                {
+                    Console.SetCursorPosition(55, i + 60);
+                    Console.WriteLine("YOU LOSE");
+                    Thread.Sleep(100);
+                }
+            }
         }
         public List<int> BallMove()
         {
@@ -63,46 +89,7 @@ namespace Brickbreaker
                 if (top >= 30)
                 {
                     top = 60;
-                    for(int i = 0; i < 200; i++)
-                    {
-                        if ((i + 1) % 37 == 0)
-                        {
-                            Console.SetCursorPosition(5, i + 60);
-                            Console.WriteLine("YOU                                                                                                     LOSE");
-                            Thread.Sleep(100);
-                        }
-                        if ((i + 1) % 23 == 0)
-                        {
-                            Console.SetCursorPosition(15, i + 60);
-                            Console.WriteLine("YOU                                                                                 LOSE");
-                            Thread.Sleep(100);
-                        }
-                        if ((i + 1) % 13 == 0)
-                        {
-                            Console.SetCursorPosition(25, i + 60);
-                            Console.WriteLine("YOU                                                             LOSE");
-                            Thread.Sleep(100);
-                        }
-                        if ((i + 1) % 7 == 0)
-                        {
-                            Console.SetCursorPosition(35, i + 60);
-                            Console.WriteLine("YOU                                         LOSE");
-                            Thread.Sleep(100);
-                        }
-                        if ((i + 1) % 3 == 0)
-                        {
-                            Console.SetCursorPosition(45, i + 60);
-                            Console.WriteLine("YOU                     LOSE");
-                            Thread.Sleep(100);
-                        }
-                        else
-                        {
-                            Console.SetCursorPosition(55, i + 60);
-                            Console.WriteLine("YOU LOSE");
-                            Thread.Sleep(100);
-                        }
-                        
-                    }
+                    LoseLoop();
                 }
                 if (left >= 111)
                 {
@@ -134,29 +121,17 @@ namespace Brickbreaker
                 }
             }
             BrickImpact();
-            if (directionTop == 1)
+            if (directionTop == 1){moveTop = top + directionTop;}
+            if (directionTop == -1){moveTop = top + directionTop;}
+            if (directionLeft == -1){moveLeft = left + directionLeft;}
+            if (directionLeft == 1){moveLeft = left + directionLeft;}
+            if (reset == 0)
             {
-                moveTop = top + directionTop;
-            }
-            if (directionTop == -1)
-            {
-                moveTop = top + directionTop;
-            }
-            if (directionLeft == -1)
-            {
-                moveLeft = left + directionLeft;
-            }
-            if (directionLeft == 1)
-            {
-                moveLeft = left + directionLeft;
-            }
-            if (directionLeft == -2)
-            {
-                moveLeft = left + directionLeft;
-            }
-            if (directionLeft == 2)
-            {
-                moveLeft = left + directionLeft;
+                moveLeft = 55;
+                moveTop = 14;
+                directionLeft = 1;
+                directionTop = 1;
+                reset++;
             }
             BallShape(moveLeft, moveTop);
             //BallSimple(moveLeft, moveTop);
@@ -168,427 +143,46 @@ namespace Brickbreaker
         {
             left = Console.CursorLeft;
             top = Console.CursorTop;
-            if (top == 8 && left > 11 && left < 34)
-                while (brickLeftLeftBottom == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(14, 8);
-                    brickLeftLeftBottom++;
-                }
-            if (top == 8 && left > 34 && left < 58)
-                while (brickLeftMidBottom == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(38, 8);
-                    brickLeftMidBottom++;
-                }
-            if (top == 8 && left > 58 && left < 82)
-                while (brickRightMidBottom == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(62, 8);
-                    brickRightMidBottom++;
-                }
-            if (top == 8 && left > 82 && left < 106)
-                while (brickRightRightBottom == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(86, 8);
-                    brickRightRightBottom++;
-                }
-            if (top == 4 && left > 11 && left < 34)
-                while (brickLeftLeftCenter == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(14, 4);
-                    brickLeftLeftCenter++;
-                }
-            if (top == 4 && left > 34 && left < 58)
-                while (brickLeftMidCenter == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(38, 4);
-                    brickLeftMidCenter++;
-                }
-            if (top == 4 && left > 58 && left < 82)
-                while (brickRightMidCenter == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(62, 4);
-                    brickRightMidCenter++;
-                }
-            if (top == 4 && left > 82 && left < 106)
-                while (brickRightRightCenter == 0)
-                {
-                    directionTop = -1;
-                    newBrick.BrickClear(86, 4);
-                    brickRightRightCenter++;
-                }
-            if (top <= 12 && top >= 8)
+            brickWidth = newBrick.BrickWidth();
+            brickHeight = 4;
+            for (int i = 0; i < newBrick.BrickPositionJoinList().Count; i++)
             {
-                if (left > 11 && left < 34)
+                brickPositionLeft = newBrick.BrickPositionJoinList()[i][0];
+                brickPositionTop = newBrick.BrickPositionJoinList()[i][1];
+                if (top >= brickPositionTop + ballHeightBottom && top <= brickPositionTop + brickHeight + ballHeightTop && left == brickPositionLeft + ballWidthRight)
                 {
-                    while (brickLeftLeftBottom == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(14, 8);
-                        brickLeftLeftBottom++;
-                    }
+                    directionLeft = -1;
+                    newBrick.RemoveBrick(brickPositionLeft, brickPositionTop);
+                    brickProgress++;
                 }
-                if (left == 11)
+                if (top >= brickPositionTop + ballHeightBottom && top <= brickPositionTop + brickHeight + ballHeightTop && left == brickPositionLeft + brickWidth + ballWidthLeft)
                 {
-                    while (brickLeftLeftBottom == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(14, 8);
-                        brickLeftLeftBottom++;
-                    }
+                    directionLeft = 1;
+                    newBrick.RemoveBrick(brickPositionLeft, brickPositionTop);
+                    brickProgress++;
                 }
-                if (left == 34)
+                if (top == brickPositionTop + ballHeightBottom && left >= brickPositionLeft + ballWidthRight + 1 && left <= brickPositionLeft + brickWidth + ballWidthLeft - 1)
                 {
-                    while (brickLeftLeftBottom == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(14, 8);
-                        brickLeftLeftBottom++;
-                    }
+                    directionTop = -1;
+                    newBrick.RemoveBrick(brickPositionLeft, brickPositionTop);
+                    brickProgress++;
                 }
-                if (left >= 34 && left <= 58)
+                if (top == brickPositionTop + brickHeight + ballHeightTop && left >= brickPositionLeft + ballWidthRight + 1 && left <= brickPositionLeft + brickWidth + ballWidthLeft - 1)
                 {
-                    while (brickLeftMidBottom == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(38, 8);
-                        brickLeftMidBottom++;
-                    }
-                }
-                if (left == 34)
-                {
-                    while (brickLeftMidBottom == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(38, 8);
-                        brickLeftMidBottom++;
-                    }
-                }
-                if (left == 58)
-                {
-                    while (brickLeftMidBottom == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(38, 8);
-                        brickLeftMidBottom++;
-                    }
-                }
-                if (left >= 58 && left <= 82)
-                {
-                    while (brickRightMidBottom == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(62, 8);
-                        brickRightMidBottom++;
-                    }
-                }
-                if (left == 58)
-                {
-                    while (brickRightMidBottom == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(62, 8);
-                        brickRightMidBottom++;
-                    }
-                }
-                if (left == 82)
-                {
-                    while (brickRightMidBottom == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(62, 8);
-                        brickRightMidBottom++;
-                    }
-                }
-                if (left >= 82 && left <= 106)
-                {
-                    while (brickRightRightBottom == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(86, 8);
-                        brickRightRightBottom++;
-                    }
-                }
-                if (left == 82)
-                {
-                    while (brickRightRightBottom == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(86, 8);
-                        brickRightRightBottom++;
-                    }
-                }
-                if (left == 106)
-                {
-                    while (brickRightRightBottom == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(86, 8);
-                        brickRightRightBottom++;
-                    }
+                    directionTop = 1;
+                    newBrick.RemoveBrick(brickPositionLeft, brickPositionTop);
+                    brickProgress++;
                 }
             }
-            if (top <= 8 && top >= 4)
-            {
-                if (left > 11 && left < 34)
-                {
-                    while (brickLeftLeftCenter == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(14, 4);
-                        brickLeftLeftCenter++;
-                    }
-                }
-                if (left == 11)
-                {
-                    while (brickLeftLeftCenter == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(14, 4);
-                        brickLeftLeftCenter++;
-                    }
-                }
-                if (left == 34)
-                {
-                    while (brickLeftLeftCenter == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(14, 4);
-                        brickLeftLeftCenter++;
-                    }
-                }
-                if (left > 34 && left < 58)
-                {
-                    while (brickLeftMidCenter == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(38, 4);
-                        brickLeftMidCenter++;
-                    }
-                }
-                if (left == 34)
-                {
-                    while (brickLeftMidCenter == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(38, 4);
-                        brickLeftMidCenter++;
-                    }
-                }
-                if (left == 58)
-                {
-                    while (brickLeftMidCenter == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(38, 4);
-                        brickLeftMidCenter++;
-                    }
-                }
-                if (left > 58 && left < 82)
-                {
-                    while (brickRightMidCenter == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(62, 4);
-                        brickRightMidCenter++;
-                    }
-                }
-                if (left == 58)
-                {
-                    while (brickRightMidCenter == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(62, 4);
-                        brickRightMidCenter++;
-                    }
-                }
-                if (left == 82)
-                {
-                    while (brickRightMidCenter == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(62, 4);
-                        brickRightMidCenter++;
-                    }
-                }
-                if (left > 82 && left < 106)
-                {
-                    while (brickRightRightCenter == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(86, 4);
-                        brickRightRightCenter++;
-                    }
-                }
-                if (left == 82)
-                {
-                    while (brickRightRightCenter == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(86, 4);
-                        brickRightRightCenter++;
-                    }
-                }
-                if (left == 106)
-                {
-                    while (brickRightRightCenter == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(86, 4);
-                        brickRightRightCenter++;
-                    }
-                }
-            }
-            if (top <= 4 && top >= 0)
-            {
-                if (left > 11 && left < 34)
-                {
-                    while (brickLeftLeftTop == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(14, 0);
-                        brickLeftLeftTop++;
-                    }
-                }
-                if (left == 11)
-                {
-                    while (brickLeftLeftTop == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(14, 0);
-                        brickLeftLeftTop++;
-                    }
-                }
-                if (left == 34)
-                {
-                    while (brickLeftLeftTop == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(14, 0);
-                        brickLeftLeftTop++;
-                    }
-                }
-                if (left > 34 && left < 58)
-                {
-                    while (brickLeftMidTop == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(38, 0);
-                        brickLeftMidTop++;
-                    }
-                }
-                if (left == 34)
-                {
-                    while (brickLeftMidTop == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(38, 0);
-                        brickLeftMidTop++;
-                    }
-                }
-                if (left == 58)
-                {
-                    while (brickLeftMidTop == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(38, 0);
-                        brickLeftMidTop++;
-                    }
-                }
-                if (left > 58 && left < 82)
-                {
-                    while (brickRightMidTop == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(62, 0);
-                        brickRightMidTop++;
-                    }
-                }
-                if (left == 58)
-                {
-                    while (brickRightMidTop == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(62, 0);
-                        brickRightMidTop++;
-                    }
-                }
-                if (left == 82)
-                {
-                    while (brickRightMidTop == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(62, 0);
-                        brickRightMidTop++;
-                    }
-                }
-                if (left > 82 && left < 106)
-                {
-                    while (brickRightRightTop == 0)
-                    {
-                        directionTop = 1;
-                        newBrick.BrickClear(86, 0);
-                        brickRightRightTop++;
-                    }
-                }
-                if (left == 82)
-                {
-                    while (brickRightRightTop == 0)
-                    {
-                        directionLeft = -1;
-                        newBrick.BrickClear(86, 0);
-                        brickRightRightTop++;
-                    }
-                }
-                if (left == 106)
-                {
-                    while (brickRightRightTop == 0)
-                    {
-                        directionLeft = 1;
-                        newBrick.BrickClear(86, 0);
-                        brickRightRightTop++;
-                    }
-                }
-            }
+            //400 lines replaced by ^^^^^!
         }
         public int BrickProgress()
         {
-            int brickProgress =
-           brickLeftLeftBottom +
-           brickLeftMidBottom +
-           brickRightMidBottom +
-           brickRightRightBottom +
-           brickLeftLeftCenter +
-           brickLeftMidCenter +
-           brickRightMidCenter +
-           brickRightRightCenter +
-           brickLeftLeftTop +
-           brickLeftMidTop +
-           brickRightMidTop +
-           brickRightRightTop;
             return brickProgress;
         }
         public void BallReset()
         {
-            brickLeftLeftBottom = 0;
-            brickLeftMidBottom = 0;
-            brickRightMidBottom = 0;
-            brickRightRightBottom = 0;
-            brickLeftLeftCenter = 0;
-            brickLeftMidCenter = 0;
-            brickRightMidCenter = 0;
-            brickRightRightCenter = 0;
-            brickLeftLeftTop = 0;
-            brickLeftMidTop = 0;
-            brickRightMidTop = 0;
-            brickRightRightTop = 0;
+            brickProgress = 0;
         }
         public void BallShape(int ballPositionLeft, int ballPositionTop)
         {
@@ -629,6 +223,10 @@ namespace Brickbreaker
             Console.SetCursorPosition(ballPositionLeft, ballPositionTop + 4);
             foreach (string shape in ballTop) { Console.Write(shape); }
             Console.SetCursorPosition(ballPositionLeft, ballPositionTop);
+        }
+        public void SendBallReset()
+        {
+            reset = 0;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Brickbreaker
         }
         public void WallShape(int left)
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 26; i++)
             {
                 side = i;
                 wallSide = "|";

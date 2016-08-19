@@ -9,14 +9,23 @@ namespace Brickbreaker
     class Paddle
     {
         int paddleMove;
+        int reset;
         public Paddle()
         {
-            Console.SetCursorPosition(50, 15);
-            paddleMove = 15;
+            paddleMove = 45;
+            reset = 0;
         }
         public void PaddleDisplay()
         {
-            paddleMove = PaddleMove();
+            if (reset == 0)
+            {
+                paddleMove = 45;
+                reset++;
+            }
+            else
+            {
+                paddleMove = PaddleMove();
+            }
             PaddleShape();
         }
         public void PaddleShape()
@@ -67,9 +76,9 @@ namespace Brickbreaker
             }
             return paddleMove;
         }
-        public int SendPaddleMove()
+        public void SendPaddleReset()
         {
-            return paddleMove;
+            reset = 0;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Brickbreaker
         static void Main(string[] args)
         {
             Game newGame = new Game();
-            newGame.RunGame(150);
+            newGame.RunGame(120);
         }
     }
 }
