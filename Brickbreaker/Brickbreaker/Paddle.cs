@@ -9,18 +9,20 @@ namespace Brickbreaker
     class Paddle
     {
         int paddleMove;
-        int reset;
+        int paddleReset;
+        int paddleMoveSpeed;
         public Paddle()
         {
+            paddleMoveSpeed = 3;
             paddleMove = 45;
-            reset = 0;
+            paddleReset = 0;
         }
         public void PaddleDisplay()
         {
-            if (reset == 0)
+            if (paddleReset == 0)
             {
                 paddleMove = 45;
-                reset++;
+                paddleReset++;
             }
             else
             {
@@ -31,12 +33,11 @@ namespace Brickbreaker
         public void PaddleShape()
         {
             string[] paddleTop = new string[30] { " ", " ", " ", " ", " ", " ", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", " ", " ", " ", " ", " ", " ", };
-            string[] paddleSide = new string[30] { " ", " ", " ", " ", " ", "|", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "|", " ", " ", " ", " ", " " };
-            string[] paddleBottom = new string[30] { " ", " ", " ", " ", " ", " ", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", " ", " ", " ", " ", " ", " ", };
+            string[] paddleMiddle = new string[30] { " ", " ", " ", " ", " ", "|", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "|", " ", " ", " ", " ", " " };
             Console.SetCursorPosition(paddleMove, 26);
             foreach (string shape01 in paddleTop) { Console.Write(shape01); }
             Console.SetCursorPosition(paddleMove, 27);
-            foreach (string shape02 in paddleSide) { Console.Write(shape02); }
+            foreach (string shape02 in paddleMiddle) { Console.Write(shape02); }
             Console.SetCursorPosition(paddleMove, 28);
             foreach (string shape03 in paddleTop) { Console.Write(shape03); }
         }
@@ -50,7 +51,7 @@ namespace Brickbreaker
             ConsoleKey keyPress = Console.ReadKey().Key;
             if (keyPress == ConsoleKey.LeftArrow)
             {
-                int moveLeft = cursorPosition - 3;
+                int moveLeft = cursorPosition - paddleMoveSpeed;
                 if (moveLeft <= 0)
                 {
                     return 0;
@@ -63,7 +64,7 @@ namespace Brickbreaker
             }
             if (keyPress == ConsoleKey.RightArrow)
             {
-                int moveRight = cursorPosition + 3;
+                int moveRight = cursorPosition + paddleMoveSpeed;
                 if (moveRight >= 90)
                 {
                     return 90;
@@ -76,9 +77,9 @@ namespace Brickbreaker
             }
             return paddleMove;
         }
-        public void SendPaddleReset()
+        public void PaddleReset()
         {
-            reset = 0;
+            paddleReset = 0;
         }
     }
 }

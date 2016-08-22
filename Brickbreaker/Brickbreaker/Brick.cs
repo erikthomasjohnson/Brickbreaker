@@ -10,37 +10,59 @@ namespace Brickbreaker
     {
         List<int> brickPositionLeft;
         List<int> brickPositionTop;
-        List<string> brickTop = new List<string> { " ", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", " " };
-        List<string> brickMiddle = new List<string> { "|", "$", "$", "$", "$", "$", "$", "$", "$", "$", "$", "$", "$", "$", "$", "$", "|" };
-        List<string> brickBlank = new List<string> { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+        List<string> brickTop;
+        List<string> brickMiddle;
+        List<string> brickBlank;
         int brickRows;
         int brickColumns;
         int brickCount;
         List<int> brickPositionJoin;
         List<List<int>> brickPositionJoinList = new List<List<int>>();
         int setBrickPositionLeft;
-        int setBrickPositionTop;
-        List<int> setBrickPositionLeftList;
+        List<int> setBrickPositionLeftList = new List<int>();
+        int resizeBrickCount;
+        int windowWidth = 120;
+        int negativeSpace = 2;
         public Brick()
         {
+            brickTop = new List<string> { " ", "-", " " };
+            brickMiddle = new List<string> { "|", "$", "|" };
+            brickBlank = new List<string> { " ", " ", " " };
             brickPositionLeft = new List<int> { 14, 38, 62, 86 };
-            brickPositionTop = new List<int> { 1, 5, 9 };
+            brickPositionTop = new List<int> { 3, 7, 11, 15 };
             brickColumns = brickPositionLeft.Count();
             brickRows = brickPositionTop.Count();
             brickCount = brickColumns * brickRows;
         }
-        public void BrickResize(int levelBrickSet)
+        public void BrickCountResize(int levelBrickSet)
         {
-            int calculate = 120 / (levelBrickSet + 2);
-            for (int i = 1; i < calculate - 1; i++)
+            resizeBrickCount = windowWidth / (levelBrickSet + negativeSpace);
+            brickPositionLeft.Clear();
+            for (int i = 1; i < levelBrickSet + 1; i++)
             {
-                setBrickPositionLeft = calculate * i;
-                //setBrickPositionTop =
-                setBrickPositionLeftList = new List<int>
-                {
-                    setBrickPositionLeft
-                };
+                setBrickPositionLeft = resizeBrickCount * i;
+                setBrickPositionLeftList.Add(setBrickPositionLeft);
             }
+            brickPositionLeft = setBrickPositionLeftList;
+            BrickResize();
+        }
+        public void BrickResize()
+        {
+            brickTop.Clear();
+            brickMiddle.Clear();
+            brickBlank.Clear();
+            brickTop.Add(" ");
+            brickMiddle.Add("|");
+            brickBlank.Add(" ");
+            for (int i = 0; i < resizeBrickCount/2; i++)
+            {
+                brickTop.Add("-");
+                brickMiddle.Add("$");
+                brickBlank.Add(" ");
+            }
+            brickTop.Add(" ");
+            brickMiddle.Add("|");
+            brickBlank.Add(" ");
         }
         public int BrickWidth()
         {
@@ -52,6 +74,10 @@ namespace Brickbreaker
         }
         public void BrickPositionJoin()
         {
+            brickColumns = brickPositionLeft.Count();
+            brickRows = brickPositionTop.Count();
+            brickCount = brickColumns * brickRows;
+            brickPositionJoinList.Clear();
             for (int i = 0; i < brickRows; i++)
             {
                 for (int ii = 0; ii < brickColumns; ii++)
