@@ -10,8 +10,14 @@ namespace Brickbreaker
     {
         static void Main(string[] args)
         {
+            System.Threading.Thread.Sleep(1000);
             Game newGame = new Game();
-            newGame.RunGame(100);
+            if (Console.KeyAvailable)
+            {
+                newGame.RunGameHard(100);
+            }
+            else
+            newGame.RunGameEasy(100);
         }
     }
 }

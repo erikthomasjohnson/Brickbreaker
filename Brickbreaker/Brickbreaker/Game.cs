@@ -40,9 +40,37 @@ namespace Brickbreaker
             newBall.touchPaddle.PaddleReset();
             newBall.BallReset();
             scoreUpdate = 0;
-            RunGameLoop(newGameLevel);
         }
-        public void RunGameLoop(int newGameLevel)
+        public void RunGameEasy(int newGameLevel)
+        {
+            RunGame(newGameLevel);
+            RunGameLoopEasy(newGameLevel);
+        }
+        public void RunGameHard(int newGameLevel)
+        {
+            RunGame(newGameLevel);
+            RunGameLoopHard(newGameLevel);
+        }
+        public void RunGameLoopHard(int newGameLevel)
+        {
+            while (!Console.KeyAvailable)
+            {
+                BallBounce();
+                newBall.newBrick.BrickMovement();
+                newBall.newBrick.BrickDisplay();
+                GameOverLose();
+                Score();
+                if (newBall.BrickProgress() == brickCount)
+                {
+                    RunGame(GameLevel());
+                }
+                PaddleSlide();
+                Thread.Sleep(40);
+            }
+            PaddleSlide();
+            RunGameLoopHard(newGameLevel);
+        }
+        public void RunGameLoopEasy(int newGameLevel)
         {
             while (!Console.KeyAvailable)
             {
@@ -51,13 +79,13 @@ namespace Brickbreaker
                 Score();
                 if (newBall.BrickProgress() == brickCount)
                 {
-                    RunGame(GameLevel());
+                    RunGameEasy(GameLevel());
                 }
                 PaddleSlide();
                 Thread.Sleep(newGameLevel);
             }
             PaddleSlide();
-            RunGameLoop(newGameLevel);
+            RunGameLoopEasy(newGameLevel);
         }
         public void BallBounce()
         {
@@ -198,7 +226,7 @@ namespace Brickbreaker
                     break;
                 }
             }
-            GameOverRestart();
+            GameOverRestart(playerStatus);
         }
         public void GameOverLose()
         {
@@ -208,7 +236,7 @@ namespace Brickbreaker
                 GameOverLoop("LOSE");
             }
         }
-        public void GameOverRestart()
+        public void GameOverRestart(string playerStatus)
         {
             Console.CursorTop = Console.CursorTop + 10;
             Console.CursorLeft = 55;
@@ -218,8 +246,15 @@ namespace Brickbreaker
             Thread.Sleep(3000);
             newBall.BrickReset();
             levelNumber = 1;
-            scores.Clear();
-            RunGame(100);
+            if (playerStatus == "WIN")
+            {
+                RunGameHard(100);
+            }
+            else
+            {
+                scores.Clear();
+                RunGameEasy(100);
+            }
         }
     }
 }

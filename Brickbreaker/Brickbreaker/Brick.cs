@@ -23,6 +23,8 @@ namespace Brickbreaker
         int resizeBrickCount;
         int windowWidth = 120;
         int negativeSpace = 2;
+        int brickMoveDirection;
+        int brickMovePosition;
         public Brick()
         {
             brickTop = new List<string> { " ", "-", " " };
@@ -33,6 +35,8 @@ namespace Brickbreaker
             brickColumns = brickPositionLeft.Count();
             brickRows = brickPositionTop.Count();
             brickCount = brickColumns * brickRows;
+            brickMoveDirection = 1;
+            brickMovePosition = 0;
         }
         public void BrickCountResize(int levelBrickSet)
         {
@@ -111,6 +115,27 @@ namespace Brickbreaker
             {
                 BrickShape(brickPositionJoinList[i][0], brickPositionJoinList[i][1]);
             }
+        }
+        public void BrickMovement()
+        {
+            if (brickMoveDirection == -1)
+            {
+                for (int ii = 0; ii < brickPositionJoinList.Count; ii++)
+                {
+                    BrickClear(brickPositionJoinList[ii][0], brickPositionJoinList[ii][1]);
+                    brickPositionJoinList[ii][0] = brickPositionJoinList[ii][0] + brickMoveDirection;
+                }
+            }
+            if (brickMoveDirection == 1)
+            {
+                for (int ii = 0; ii < brickPositionJoinList.Count; ii++)
+                {
+                    BrickClear(brickPositionJoinList[ii][0], brickPositionJoinList[ii][1]);
+                    brickPositionJoinList[ii][0] = brickPositionJoinList[ii][0] + brickMoveDirection;
+                }
+            }
+            brickMovePosition++;
+            if (brickMovePosition == 10) { brickMovePosition = 0; brickMoveDirection = -brickMoveDirection; }
         }
         public void BrickShape(int left, int top)
         {

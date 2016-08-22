@@ -15,3 +15,9 @@ C:\Users\erikj\Documents\GitHub\Brickbreaker\Brickbreaker\Brickbreaker\obj\Debug
 C:\Users\erikj\Documents\GitHub\Brickbreaker\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.exe
 C:\Users\erikj\Documents\GitHub\Brickbreaker\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.pdb
 C:\Users\erikj\Documents\GitHub\Brickbreaker\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.csprojResolveAssemblyReference.cache
+C:\Users\erikj\Desktop\Brickbreaker\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.exe.config
+C:\Users\erikj\Desktop\Brickbreaker\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.exe
+C:\Users\erikj\Desktop\Brickbreaker\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.pdb
+C:\Users\erikj\Desktop\Brickbreaker\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.exe
+C:\Users\erikj\Desktop\Brickbreaker\Brickbreaker\Brickbreaker\bin\Debug\Brickbreaker.pdb
+C:\Users\erikj\Desktop\Brickbreaker\Brickbreaker\Brickbreaker\obj\Debug\Brickbreaker.csprojResolveAssemblyReference.cache
