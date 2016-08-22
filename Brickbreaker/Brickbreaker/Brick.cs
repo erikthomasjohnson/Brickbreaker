@@ -37,7 +37,7 @@ namespace Brickbreaker
         public void BrickCountResize(int levelBrickSet)
         {
             resizeBrickCount = windowWidth / (levelBrickSet + negativeSpace);
-            brickPositionLeft.Clear();
+            setBrickPositionLeftList.Clear();
             for (int i = 1; i < levelBrickSet + 1; i++)
             {
                 setBrickPositionLeft = resizeBrickCount * i;

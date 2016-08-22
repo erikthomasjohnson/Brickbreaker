@@ -81,7 +81,7 @@ namespace Brickbreaker
             if (ballReset == 0)
             {
                 moveLeft = 55;
-                moveTop = 14;
+                moveTop = 20;
                 directionLeft = 1;
                 directionTop = 1;
                 ballReset++;
